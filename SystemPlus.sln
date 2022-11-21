@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemPlusAPI", "SystemPlusAPI\SystemPlusAPI.csproj", "{707799E6-3491-4C4B-AAD3-5CAA4C53E3DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{707799E6-3491-4C4B-AAD3-5CAA4C53E3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707799E6-3491-4C4B-AAD3-5CAA4C53E3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707799E6-3491-4C4B-AAD3-5CAA4C53E3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707799E6-3491-4C4B-AAD3-5CAA4C53E3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CF2A7DC-BCAB-465F-94CE-4384D8CF3EA3}
+	EndGlobalSection
+EndGlobal
