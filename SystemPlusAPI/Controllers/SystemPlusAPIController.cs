@@ -71,7 +71,9 @@ namespace SystemPlusAPI.Controllers
             {
                 return NotFound("Vehicle with that id does not exist");
             }
-            _repository.Update(vehicle);
+            vehicle.PremiumNumber = vehicleDTO.PremiumNumber;
+            vehicle.Year = vehicleDTO.Year;
+            vehicle.Cm = vehicleDTO.Cm;
             _repository.Save();
             return Ok(vehicle);
         }
