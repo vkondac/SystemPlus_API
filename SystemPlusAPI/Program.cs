@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using SystemPlusAPI.Data.VehicleRepository.Contract;
+using SystemPlusAPI.Data.VehicleRepository.Implementation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +10,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<SystemPlusAPI.Data.ApplicationDbContext>(
+        options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 

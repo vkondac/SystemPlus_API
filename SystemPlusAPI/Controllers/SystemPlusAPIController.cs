@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using SystemPlusAPI.Data;
+using SystemPlusAPI.Data.VehicleRepository.Contract;
 using SystemPlusAPI.Models;
-using SystemPlusAPI.Models.Dto;
 
 namespace SystemPlusAPI.Controllers
 {
@@ -10,44 +8,40 @@ namespace SystemPlusAPI.Controllers
     [ApiController]
     public class SystemPlusAPIController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<VehicleDTO>> GetVehicles()
+        private IRepository<Vehicle> _repository;
+
+        public SystemPlusAPIController(IRepository<Vehicle> repository)
         {
-            return Ok(VehicleStore.vehicles);
+           _repository= repository;
         }
-        [HttpGet("id:int")]
+
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<VehicleDTO> GetSingleVehicle(int id)
-        {   
-            if(id== 0)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<IEnumerable<Vehicle>> GetVehicles()
+        {
+            var vehicles = _repository.GetAll().OrderByDescending(x => x.CreatedDate).Where(x => x.IsDeleted == false);
+            if (vehicles == null)
             {
-                return BadRequest();
+                return NotFound("No Vehicles Fund");
             }
-            var vehicle = VehicleStore.vehicles.FirstOrDefault(x => x.Id == id);
-            if(vehicle == null)
-            {
-                return NotFound();
-            }
-            return Ok(vehicle);
+            return Ok(vehicles);
         }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<VehicleDTO> CreateVehicle([FromBody]VehicleDTO vehicle)
+        public ActionResult<Vehicle> CreateVehicle([FromBody] Vehicle vehicle)
         {
             if (vehicle == null)
             {
                 return BadRequest(vehicle);
             }
-            if(vehicle.Id > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            vehicle.Id = VehicleStore.vehicles.Max(x => x.Id)+1;
-            VehicleStore.vehicles.Add(vehicle);
+            vehicle.Id = Guid.NewGuid();
+            _repository.Add(vehicle);
+            _repository.Save();
             return Ok(vehicle);
         }
 
@@ -55,35 +49,30 @@ namespace SystemPlusAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<VehicleDTO> DeleteVehicle(int id)
+        public ActionResult<Vehicle> DeleteVehicle(Guid id)
         {
-            var vehicle = VehicleStore.vehicles.FirstOrDefault(x => x.Id == id);
+            var vehicle = _repository.GetSingleOrDefault(x => x.Id == id);
             if (vehicle == null)
             {
-                return NotFound("Vehicle with that id does not exist");
+                return BadRequest(vehicle);
             }
-            if(id < 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            VehicleStore.vehicles.Remove(vehicle);
+            vehicle.IsDeleted = true;
+            _repository.Save();
             return Ok(vehicle);
         }
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<VehicleDTO> EditVehicle(int id, [FromBody] VehicleDTO vehicleDTO)
+        public ActionResult<Vehicle> EditVehicle(Guid id, [FromBody] Vehicle vehicleDTO)
         {
-            var vehicle = VehicleStore.vehicles.FirstOrDefault(x => x.Id == id);
+            var vehicle = _repository.GetSingleOrDefault(x => x.Id == id);
             if (vehicleDTO == null)
             {
                 return NotFound("Vehicle with that id does not exist");
             }
-            vehicle.PremiumNumber = vehicleDTO.PremiumNumber;
-            vehicle.Year= vehicleDTO.Year;
-            vehicle.Cm = vehicleDTO.Cm;
-            vehicle.Kw= vehicleDTO.Kw;
+            _repository.Update(vehicle);
+            _repository.Save();
             return Ok(vehicle);
         }
     }
