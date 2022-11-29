@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using SystemPlusAPI.Data.VehicleRepository.Contract;
 using SystemPlusAPI.Data.VehicleRepository.Implementation;
+using SystemPlusAPI.Data.UserRepository.Implementation;
+using SystemPlusAPI.Data.UserRepository.Contract;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SystemPlusAPI.Data.ApplicationDbContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

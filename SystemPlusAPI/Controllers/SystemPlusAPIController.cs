@@ -35,6 +35,9 @@ namespace SystemPlusAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<Vehicle> CreateVehicle([FromBody] Vehicle vehicle)
         {
+            if(!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             if (vehicle == null)
             {
                 return BadRequest(vehicle);
@@ -66,6 +69,10 @@ namespace SystemPlusAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<Vehicle> EditVehicle(Guid id, [FromBody] Vehicle vehicleDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var vehicle = _repository.GetSingleOrDefault(x => x.Id == id);
             if (vehicleDTO == null)
             {
