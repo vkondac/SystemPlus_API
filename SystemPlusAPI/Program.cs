@@ -3,6 +3,8 @@ using SystemPlusAPI.Data.VehicleRepository.Contract;
 using SystemPlusAPI.Data.VehicleRepository.Implementation;
 using SystemPlusAPI.Data.UserRepository.Implementation;
 using SystemPlusAPI.Data.UserRepository.Contract;
+using SystemPlusAPI.Services.Contract;
+using SystemPlusAPI.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<SystemPlusAPI.Data.ApplicationDbContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICalculator, Calculator>();
+builder.Configuration.AddJsonFile("CalcParameters.json", optional: false, reloadOnChange: false);
 
 var app = builder.Build();
 
