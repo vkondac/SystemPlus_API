@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SystemPlusAPI.Data.UserRepository.Contract;
 using SystemPlusAPI.Models.Dto;
 
@@ -13,15 +14,16 @@ namespace SystemPlusAPI.Controllers
         {
             _userRepo = user;
         }
+        
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginRequestDTO loginRequestDTO)
         {
-            var LoginResponse = await _userRepo.Login(loginRequestDTO);
-            if (LoginResponse.Token == null || string.IsNullOrEmpty(LoginResponse.Token))
+            var loginResponse = await _userRepo.Login(loginRequestDTO);
+            if (loginResponse.Token == null || string.IsNullOrEmpty(loginResponse.Token))
             {
                 return BadRequest(new { message = "Username or password is incorrect"});
             }
-            return Ok("Logged in succesfully");
+            return Ok(loginResponse.Token);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO registrationRequestDTO)

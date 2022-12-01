@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SystemPlusAPI.Data.VehicleRepository.Contract;
 using SystemPlusAPI.Models;
 
@@ -14,7 +15,7 @@ namespace SystemPlusAPI.Controllers
         {
            _repository= repository;
         }
-
+        [Authorize(Roles = "user,admin")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -28,7 +29,7 @@ namespace SystemPlusAPI.Controllers
             }
             return Ok(vehicles);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -47,7 +48,7 @@ namespace SystemPlusAPI.Controllers
             _repository.Save();
             return Ok(vehicle);
         }
-
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,6 +64,7 @@ namespace SystemPlusAPI.Controllers
             _repository.Save();
             return Ok(vehicle);
         }
+        [Authorize(Roles = "admin")]
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
