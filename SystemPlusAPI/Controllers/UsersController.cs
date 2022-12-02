@@ -28,7 +28,7 @@ namespace SystemPlusAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO registrationRequestDTO)
         {
-           var user = _userRepo.Register(registrationRequestDTO);
+           var user = await _userRepo.Register(registrationRequestDTO);
             return Ok("Sucessfully registered");
         }
 

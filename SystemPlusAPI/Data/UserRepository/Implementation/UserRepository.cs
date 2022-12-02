@@ -6,6 +6,8 @@ using System.Text;
 using SystemPlusAPI.Data.UserRepository.Contract;
 using SystemPlusAPI.Models;
 using SystemPlusAPI.Models.Dto;
+using BCrypt.Net;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace SystemPlusAPI.Data.UserRepository.Implementation
 {
@@ -21,8 +23,7 @@ namespace SystemPlusAPI.Data.UserRepository.Implementation
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
-            var user = _context.Users.FirstOrDefault(x => x.UserName.ToLower() == loginRequestDTO.UserName.ToLower() &&
-            x.Password == loginRequestDTO.Password);
+            var user = _context.Users.SingleOrDefault(x => x.UserName.ToLower() == loginRequestDTO.UserName.ToLower());
             if (user == null)
             {
                 return new LoginResponseDTO()
@@ -31,35 +32,46 @@ namespace SystemPlusAPI.Data.UserRepository.Implementation
                     User = user
                 };
             }
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secretKey);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginRequestDTO.Password, user.Password);
+            if (isValidPassword)
             {
-                Subject = new ClaimsIdentity(new Claim[]
-               {
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(secretKey);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                   {
                    new Claim(ClaimTypes.Name, user.Id.ToString()),
                    new Claim(ClaimTypes.Role, user.Role)
-               }),
-                Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            LoginResponseDTO login = new LoginResponseDTO()
+                   }),
+                    Expires = DateTime.Now.AddDays(7),
+                    SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                LoginResponseDTO login = new LoginResponseDTO()
+                {
+                    Token = tokenHandler.WriteToken(token),
+                    User = user
+                };
+                return login;
+            }
+            return new LoginResponseDTO()
             {
-                Token = tokenHandler.WriteToken(token),
+                Token = "",
                 User = user
             };
-            return login;
         }
 
         public async Task<User> Register(RegistrationRequestDTO registration)
         {
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(registration.Password);
             User user = new User
             {
                 Id = Guid.NewGuid(),
                 UserName = registration.UserName,
-                Password = registration.Password,
+                Password = hashedPassword,
                 Email = registration.Email,
                 Name = registration.Name,
                 Role = registration.Role 
@@ -68,6 +80,7 @@ namespace SystemPlusAPI.Data.UserRepository.Implementation
             await _context.SaveChangesAsync();
             user.Password = "";
             return user;
+
         }
     }
 }
