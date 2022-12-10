@@ -1,7 +1,10 @@
-﻿namespace SystemPlusAPI.Models.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SystemPlusAPI.Models.Dto
 {
     public class CalcRequestDTO
     {
+        [Required]
         public string VehicleYype { get; set; }
         public int Cm { get; set; }
         public int Kw { get; set; }

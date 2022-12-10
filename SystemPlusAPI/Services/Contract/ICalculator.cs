@@ -4,6 +4,6 @@ namespace SystemPlusAPI.Services.Contract
 {
     public interface ICalculator
     {
-        public float Calculate(CalcRequestDTO calcRequestDTO);
+        public dynamic Calculate(CalcRequestDTO calcRequestDTO);
     }
 }

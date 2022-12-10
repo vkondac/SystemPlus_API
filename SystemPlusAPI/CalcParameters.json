@@ -1,7 +1,74 @@
 {
-  "kw": {
-    "100kw": 1000,
-    "200kw": 2000,
-    "300kw" : 3000
-  }
+  "putnicko": [
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "cena": 710
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "cena": 1410
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "cena": 2130
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "cena": 2860
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 3000,
+      "cena": 4300
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 100000,
+      "cena": 7110
+    }
+  ],
+  "motocikl": [
+    {
+      "minCm": 0,
+      "maxCm": 125,
+      "cena": 570
+    },
+    {
+      "minCm": 125,
+      "maxCm": 250,
+      "cena": 840
+    },
+    {
+      "minCm": 250,
+      "maxCm": 500,
+      "cena": 1410
+    }
+  ],
+  "teretno": [
+    {
+      "minCm": 0,
+      "maxCm": 2,
+      "cena": 2140
+    },
+    {
+      "minCm": 2,
+      "maxCm": 5,
+      "cena": 2860
+    },
+    {
+      "minCm": 5,
+      "maxCm": 12,
+      "cena": 4980
+    },
+    {
+      "minCm": 12,
+      "maxCm": 1000,
+      "cena": 7110
+    }
+  ]
+
 }

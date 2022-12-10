@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
 using SystemPlusAPI.Data.VehicleRepository.Contract;
 using SystemPlusAPI.Models;
+using SystemPlusAPI.Models.Dto;
+using SystemPlusAPI.Services.Contract;
 
 namespace SystemPlusAPI.Controllers
 {
@@ -10,10 +13,12 @@ namespace SystemPlusAPI.Controllers
     public class SystemPlusAPIController : ControllerBase
     {
         private IRepository<Vehicle> _repository;
+        private ICalculator _calc;
 
-        public SystemPlusAPIController(IRepository<Vehicle> repository)
+        public SystemPlusAPIController(IRepository<Vehicle> repository,ICalculator calc)
         {
-           _repository= repository;
+           _repository = repository;
+           _calc = calc;
         }
         [Authorize(Roles = "user,admin")]
         [HttpGet]
@@ -48,6 +53,13 @@ namespace SystemPlusAPI.Controllers
             _repository.Save();
             return Ok(vehicle);
         }
+
+        [HttpPost("calculator")]
+        public dynamic TestCalculator([FromBody]CalcRequestDTO calcRequestDTO)
+        {
+            return _calc.Calculate(calcRequestDTO);
+        }
+
         [Authorize(Roles = "admin")]
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
