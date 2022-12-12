@@ -1,0 +1,287 @@
+{
+  "putnickoTax": [
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 858
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 1072
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 1215
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 1430
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 562
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 1686
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 2107
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 2388
+    },
+    {
+      "minCm": 1150,
+      "maxCm": 1300,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 2810
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 1236
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 3708
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 4635
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 5253
+    },
+    {
+      "minCm": 1300,
+      "maxCm": 1600,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 6180
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 2552
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 7656
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 9570
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 10846
+    },
+    {
+      "minCm": 1600,
+      "maxCm": 2000,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 12760
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 2500,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 12524
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 2500,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 21917
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 2500,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 37572
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 2500,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 46965
+    },
+    {
+      "minCm": 2000,
+      "maxCm": 2500,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 62620
+    },
+    {
+      "minCm": 2500,
+      "maxCm": 3000,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 25378
+    },
+    {
+      "minCm": 2500,
+      "maxCm": 3000,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 44411
+    },
+    {
+      "minCm": 2500,
+      "maxCm": 3000,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 76134
+    },
+    {
+      "minCm": 2500,
+      "maxCm": 3000,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 95167
+    },
+    {
+      "minCm": 2500,
+      "maxCm": 3000,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 126890
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 10000,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 52454
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 10000,
+      "minGod": 2003,
+      "maxGod": 2011,
+      "cena": 91794
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 10000,
+      "minGod": 2012,
+      "maxGod": 2013,
+      "cena": 157362
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 10000,
+      "minGod": 2014,
+      "maxGod": 2016,
+      "cena": 196702
+    },
+    {
+      "minCm": 3000,
+      "maxCm": 10000,
+      "minGod": 2017,
+      "maxGod": 2022,
+      "cena": 262270
+    }
+  ],
+  "motociklTax": [
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    },
+    {
+      "minCm": 0,
+      "maxCm": 1150,
+      "minGod": 1900,
+      "maxGod": 2002,
+      "cena": 286
+    }
+  ]
+
+}

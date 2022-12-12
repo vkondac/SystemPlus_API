@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
+using SystemPlusAPI.Data;
 using SystemPlusAPI.Models.Dto;
 using SystemPlusAPI.Services.Contract;
 
@@ -15,66 +16,68 @@ namespace SystemPlusAPI.Services.Implementation
         public dynamic Calculate(CalcRequestDTO calcRequestDTO)
         {
             int total = 0;
+            int commune = 0;
             int tax = 0;
-            switch (calcRequestDTO.VehicleYype)
+           if(calcRequestDTO.VehicleYype == Constants.PassengerVehicle || calcRequestDTO.VehicleYype == Constants.MotoCycle)
             {
-                case "putnicko" :
-                    var taxes = _config.GetSection(calcRequestDTO.VehicleYype)
-                      .GetChildren()
-                      .ToList()
-                      .Select(x => new {
-                          Min = x.GetValue<int>("minCm"),
-                          Max = x.GetValue<int>("maxCm"),
-                          Price = x.GetValue<int>("cena")
-                      });
-                    foreach (var item in taxes)
+                var communes = _config.GetSection(calcRequestDTO.VehicleYype)
+                  .GetChildren()
+                  .ToList()
+                  .Select(x => new
+                  {
+                      Min = x.GetValue<int>("minCm"),
+                      Max = x.GetValue<int>("maxCm"),
+                      Price = x.GetValue<int>("cena")
+                  });
+                foreach (var item in communes)
+                {
+                    if (calcRequestDTO.Cm >= item.Min && calcRequestDTO.Cm <= item.Max)
                     {
-                        if (calcRequestDTO.Cm >= item.Min && calcRequestDTO.Cm <= item.Max)
+                        commune = item.Price;
+                    }
+                }
+                var taxes = _config.GetSection(calcRequestDTO.VehicleYype + "Tax")
+                    .GetChildren().ToList().Select(x => new
+                    {
+                        Min = x.GetValue<int>("minCm"),
+                        Max = x.GetValue<int>("maxCm"),
+                        MinYear = x.GetValue<int>("minGod"),
+                        MaxYear = x.GetValue<int>("maxGod"),
+                        Price = x.GetValue<int>("cena")
+                    });
+                foreach(var item in taxes)
+                {
+                    if(calcRequestDTO.Cm >= item.Min && calcRequestDTO.Cm <= item.Max)
+                    {
+                        if(calcRequestDTO.Year >= item.MinYear && calcRequestDTO.Year <= item.MaxYear)
                         {
                             tax = item.Price;
                         }
                     }
-                    break;
-                case "motocikl":
-                     taxes = _config.GetSection(calcRequestDTO.VehicleYype)
-                      .GetChildren()
-                      .ToList()
-                      .Select(x => new {
-                          Min = x.GetValue<int>("minCm"),
-                          Max = x.GetValue<int>("maxCm"),
-                          Price = x.GetValue<int>("cena")
-                      });
-                    foreach (var item in taxes)
-                    {
-                        if (calcRequestDTO.Cm >= item.Min && calcRequestDTO.Cm <= item.Max)
-                        {
-                            tax = item.Price;
-                        }
-                    }
-                    break;
-                case "teretno":
-                    taxes = _config.GetSection(calcRequestDTO.VehicleYype)
+                }
+
+            }
+            
+           if(calcRequestDTO.VehicleYype == Constants.HeavyVehicle)
+                {
+                    var communes = _config.GetSection(calcRequestDTO.VehicleYype)
                        .GetChildren()
                        .ToList()
-                       .Select(x => new {
+                       .Select(x => new
+                       {
                            Min = x.GetValue<int>("minCm"),
                            Max = x.GetValue<int>("maxCm"),
                            Price = x.GetValue<int>("cena")
                        });
-                    foreach (var item in taxes)
+                    foreach (var item in communes)
                     {
                         if (calcRequestDTO.CarryWeight >= item.Min && calcRequestDTO.CarryWeight <= item.Max)
                         {
-                            tax = item.Price;
+                              commune = item.Price;
                         }
                     }
-                    break;
-            }
-
-
+                }
             return tax;
-            
         }
-      
     }
 }
