@@ -9,6 +9,8 @@
         public static class Prices
         {
             public static int Sticker => 2000;
+            public static int Plates => 3539;
+            public static int TrafficDocuments => 1670;
 
         }
 

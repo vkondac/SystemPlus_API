@@ -11,5 +11,8 @@ namespace SystemPlusAPI.Models.Dto
         public int PremiumNumber { get; set; }
         public int Year { get; set; }
         public int CarryWeight { get; set; }
+        public bool Sticker { get; set; }
+        public bool Plates { get; set; }
+        public bool TrafficDocument { get; set; }
     }
 }

@@ -69,6 +69,10 @@
       "maxCm": 1000,
       "cena": 7110
     }
-  ]
-
+  ],
+  "Ostalo": {
+    "nalepnica": 776,
+    "saobracajna": 1670,
+    "tablice" :  3539
+  }
 }

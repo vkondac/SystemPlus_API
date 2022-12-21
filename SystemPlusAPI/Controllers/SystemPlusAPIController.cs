@@ -34,6 +34,18 @@ namespace SystemPlusAPI.Controllers
             }
             return Ok(vehicles);
         }
+
+        [HttpPost("download")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Donwload([FromBody] string fileName)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), fileName + ".json");
+            var bytes = await System.IO.File.ReadAllBytesAsync(path);
+            return File(bytes,"application/json",Path.GetFileName(path));
+        }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
