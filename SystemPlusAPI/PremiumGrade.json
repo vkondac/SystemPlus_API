@@ -1,0 +1,196 @@
+﻿{
+  "putnickoPrem": [
+    {
+      "minKw": 1,
+      "maxKw": 22,
+      "stepen": 1,
+      "cena" : 5969
+    },
+    {
+      "minKw": 1,
+      "maxKw": 22,
+      "stepen": 2,
+      "cena" : 6765
+    },
+    {
+      "minKw": 1,
+      "maxKw": 22,
+      "stepen": 3,
+      "cena" : 7561
+    },
+    {
+      "minKw": 1,
+      "maxKw": 22,
+      "stepen": 4,
+      "cena" : 7959
+    },
+    {
+      "minKw": 22,
+      "maxKw": 33,
+      "stepen": 1,
+      "cena" : 7132
+    },
+    {
+      "minKw": 22,
+      "maxKw": 33,
+      "stepen": 2,
+      "cena" : 8083
+    },
+    {
+      "minKw": 22,
+      "maxKw": 33,
+      "stepen": 3,
+      "cena" : 9034
+    },
+    {
+      "minKw": 22,
+      "maxKw": 33,
+      "stepen": 4,
+      "cena" : 9509
+    },
+    {
+      "minKw": 33,
+      "maxKw": 44,
+      "stepen": 1,
+      "cena" : 8301
+    },
+    {
+      "minKw": 33,
+      "maxKw": 44,
+      "stepen": 2,
+      "cena" : 9408
+    },
+    {
+      "minKw": 33,
+      "maxKw": 44,
+      "stepen": 3,
+      "cena" : 10515
+    },
+    {
+      "minKw": 33,
+      "maxKw": 44,
+      "stepen": 4,
+      "cena" : 11068
+    },
+    {
+      "minKw": 44,
+      "maxKw": 55,
+      "stepen": 1,
+      "cena" : 9473
+    },
+    {
+      "minKw": 44,
+      "maxKw": 55,
+      "stepen": 2,
+      "cena" : 10786
+    },
+    {
+      "minKw": 44,
+      "maxKw": 55,
+      "stepen": 3,
+      "cena" : 11999
+    },
+    {
+      "minKw": 44,
+      "maxKw": 55,
+      "stepen": 4,
+      "cena" : 12630
+    },
+    {
+      "minKw": 55,
+      "maxKw": 66,
+      "stepen": 1,
+      "cena" : 10633
+    },
+    {
+      "minKw": 55,
+      "maxKw": 66,
+      "stepen": 2,
+      "cena" : 12051
+    },
+    {
+      "minKw": 55,
+      "maxKw": 66,
+      "stepen": 3,
+      "cena" : 13469
+    },
+    {
+      "minKw": 55,
+      "maxKw": 66,
+      "stepen": 4,
+      "cena" : 14178
+    },
+    {
+      "minKw": 66,
+      "maxKw": 84,
+      "stepen": 1,
+      "cena" : 12194
+    },
+    {
+      "minKw": 66,
+      "maxKw": 84,
+      "stepen": 2,
+      "cena" : 13820
+    },
+    {
+      "minKw": 66,
+      "maxKw": 84,
+      "stepen": 3,
+      "cena" : 15446
+    },
+    {
+      "minKw": 66,
+      "maxKw": 84,
+      "stepen": 4,
+      "cena" : 16259
+    },
+    {
+      "minKw": 84,
+      "maxKw": 110,
+      "stepen": 1,
+      "cena" : 14527
+    },
+    {
+      "minKw": 84,
+      "maxKw": 110,
+      "stepen": 2,
+      "cena" : 16464
+    },
+    {
+      "minKw": 84,
+      "maxKw": 110,
+      "stepen": 3,
+      "cena" : 18401
+    },
+    {
+      "minKw": 84,
+      "maxKw": 110,
+      "stepen": 4,
+      "cena" : 19369
+    },
+    {
+      "minKw": 110,
+      "maxKw": 1000,
+      "stepen": 1,
+      "cena" : 17250
+    },
+    {
+      "minKw": 110,
+      "maxKw": 1000,
+      "stepen": 2,
+      "cena" : 19339
+    },
+    {
+      "minKw": 110,
+      "maxKw": 1000,
+      "stepen": 3,
+      "cena" : 21851
+    },
+    {
+      "minKw": 110,
+      "maxKw": 1000,
+      "stepen": 4,
+      "cena" : 23000
+    }
+  ]
+}

@@ -15,10 +15,8 @@ namespace SystemPlusAPI.Services.Implementation
             _config = configuration;
         }
         public dynamic Calculate(CalcRequestDTO calcRequestDTO)
-        {
+        {   
             int total = 0;
-            int commune = 0;
-            int tax = 0;
             if (calcRequestDTO.VehicleYype == PassengerVehicle || calcRequestDTO.VehicleYype == MotoCycle)
             {
                 var communes = _config.GetSection(calcRequestDTO.VehicleYype)
@@ -31,7 +29,7 @@ namespace SystemPlusAPI.Services.Implementation
                       Price = x.GetValue<int>("cena")
                   });
 
-                commune = communes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max)
+                var commune = communes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max)
                     .Select(x => x.Price)
                     .FirstOrDefault();
 
@@ -45,12 +43,26 @@ namespace SystemPlusAPI.Services.Implementation
                         Price = x.GetValue<int>("cena")
                     });
 
-                tax = taxes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max && calcRequestDTO.Year >= x.MinYear && calcRequestDTO.Year <= x.MaxYear).
+                var tax = taxes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max && calcRequestDTO.Year >= x.MinYear && calcRequestDTO.Year <= x.MaxYear).
                     Select(x => x.Price).FirstOrDefault();
 
-                if (calcRequestDTO.Sticker) { var sticker = Prices.Sticker; }
-                if (calcRequestDTO.TrafficDocument) { var traffic = Prices.TrafficDocuments; }
-                if (calcRequestDTO.Plates) { var plates = Prices.Plates; }
+                var premiumNumbers = _config.GetSection(calcRequestDTO.VehicleYype + "Prem").GetChildren().ToList().Select(x => new
+                {
+                    MinKw = x.GetValue<int>("minKw"),
+                    MaxKw = x.GetValue<int>("maxKw"),
+                    Grade = x.GetValue<int>("stepen"),
+                    Price = x.GetValue<int>("cena")
+                });
+
+                var premiumNumber = premiumNumbers
+                    .Where(x => calcRequestDTO.Kw >= x.MinKw && calcRequestDTO.Kw <= x.MaxKw && calcRequestDTO.PremiumNumber == x.Grade)
+                    .Select(x => x.Price)
+                    .FirstOrDefault();
+
+                 total = commune + tax + premiumNumber;
+                if (calcRequestDTO.Sticker) { total += Prices.Sticker; }
+                if (calcRequestDTO.TrafficDocument) { total += Prices.TrafficDocuments; }
+                if (calcRequestDTO.Plates) { total += Prices.Plates; }
 
             }
 
@@ -66,7 +78,7 @@ namespace SystemPlusAPI.Services.Implementation
                        Price = x.GetValue<int>("cena")
                    });
 
-                commune = communes.Where(x => calcRequestDTO.CarryWeight >= x.Min && calcRequestDTO.CarryWeight <= x.Max).
+                var commune = communes.Where(x => calcRequestDTO.CarryWeight >= x.Min && calcRequestDTO.CarryWeight <= x.Max).
                 Select(x => x.Price).FirstOrDefault();
 
                 var taxes = _config.GetSection(calcRequestDTO.VehicleYype + "Tax")
@@ -79,11 +91,10 @@ namespace SystemPlusAPI.Services.Implementation
                   Price = x.GetValue<int>("cena")
               });
 
-                tax = taxes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max && calcRequestDTO.Year >= x.MinYear && calcRequestDTO.Year <= x.MaxYear).
+                var tax = taxes.Where(x => calcRequestDTO.Cm >= x.Min && calcRequestDTO.Cm <= x.Max && calcRequestDTO.Year >= x.MinYear && calcRequestDTO.Year <= x.MaxYear).
                     Select(x => x.Price).FirstOrDefault();
-
             }
-            return tax;
+            return total;
         }
     }
 }

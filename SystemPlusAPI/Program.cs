@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICalculator, Calculator>();
 builder.Configuration.AddJsonFile("CalcParameters.json", optional: false, reloadOnChange: false);
 builder.Configuration.AddJsonFile("CarTaxParameters.json", optional: false, reloadOnChange: false);
+builder.Configuration.AddJsonFile("PremiumGrade.json", optional: false, reloadOnChange: false);
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 
